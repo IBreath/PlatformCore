@@ -13,6 +13,7 @@ public class IndexController {
         List<String> models = new ArrayList<>();
         models.add("test1");
         models.add("test2");
+        models.add("test3");
         return models;
     }
 
