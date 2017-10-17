@@ -1,0 +1,18 @@
+language: java
+jdk:
+ - oraclejdk8
+deploy:
+  - provider: heroku
+    api_key:
+      secure: $HEROKU_API_KEY
+    app: ibreathplatformcoredev
+    on:
+      repo: IBreath/PlatformCore
+      branch: dev
+  - provider: heroku
+    api_key:
+      secure: $HEROKU_API_KEY
+    app: ibreathplatformcorestaging
+    on:
+      repo: IBreath/PlatformCore
+      branch: master
