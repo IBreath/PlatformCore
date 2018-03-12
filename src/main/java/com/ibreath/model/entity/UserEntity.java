@@ -1,15 +1,19 @@
 package com.ibreath.model.entity;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "mUser")
+@Table(name = "User")
 public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToMany(mappedBy="userEntity", cascade=CascadeType.ALL)
+    private List<MesureEntity> alcoholMesures;
 
     @Column(name = "firstname")
     private String firstname;
@@ -17,93 +21,99 @@ public class UserEntity {
     @Column(name = "lastname")
     private String lastname;
 
-    @Column(name = "emal")
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "age")
-    private Integer age;
+    @Column(name = "birthDate")
+    private LocalDateTime birthDate;
 
     @Column(name = "height")
     private Double height;
 
-    @Column(name = "Weight")
+    @Column(name = "weight")
     private Double weight;
 
-    @OneToMany(mappedBy="userEntity", cascade=CascadeType.ALL)
-    private List<AlcoholMesure> alcoholMesures;
-
-    @OneToMany(mappedBy="userEntity", cascade=CascadeType.ALL)
-    private List<LearningIndicationEntity> learningIndicationEntities;
+    @Column(name = "decreaseRate")
+    private Double decreaseRate;
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public UserEntity setId(long id) {
         this.id = id;
+        return this;
+    }
+
+    public List<MesureEntity> getAlcoholMesures() {
+        return alcoholMesures;
+    }
+
+    public UserEntity setAlcoholMesures(List<MesureEntity> alcoholMesures) {
+        this.alcoholMesures = alcoholMesures;
+        return this;
     }
 
     public String getFirstname() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public UserEntity setFirstname(String firstname) {
         this.firstname = firstname;
+        return this;
     }
 
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
+    public UserEntity setLastname(String lastname) {
         this.lastname = lastname;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public UserEntity setEmail(String email) {
         this.email = email;
+        return this;
     }
 
-    public Integer getAge() {
-        return age;
+    public LocalDateTime getBirthDate() {
+        return birthDate;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public UserEntity setBirthDate(LocalDateTime birthDate) {
+        this.birthDate = birthDate;
+        return this;
     }
 
     public Double getHeight() {
         return height;
     }
 
-    public void setHeight(Double height) {
+    public UserEntity setHeight(Double height) {
         this.height = height;
+        return this;
     }
 
     public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(Double weight) {
+    public UserEntity setWeight(Double weight) {
         this.weight = weight;
+        return this;
     }
 
-    public List<AlcoholMesure> getAlcoholMesures() {
-        return alcoholMesures;
+    public Double getDecreaseRate() {
+        return decreaseRate;
     }
 
-    public void setAlcoholMesures(List<AlcoholMesure> alcoholMesures) {
-        this.alcoholMesures = alcoholMesures;
-    }
-
-    public List<LearningIndicationEntity> getLearningIndicationEntities() {
-        return learningIndicationEntities;
-    }
-
-    public void setLearningIndicationEntities(List<LearningIndicationEntity> learningIndicationEntities) {
-        this.learningIndicationEntities = learningIndicationEntities;
+    public UserEntity setDecreaseRate(Double decreaseRate) {
+        this.decreaseRate = decreaseRate;
+        return this;
     }
 }

@@ -3,7 +3,6 @@ package com.ibreath.resource;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ibreath.model.entity.LearningIndicationEntity;
 import com.ibreath.model.entity.UserEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,12 +24,6 @@ public class MeasureResource {
     )
     @JsonIgnore
     private UserEntity userEntity;
-
-    @ApiModelProperty(
-            "Learning indication"
-    )
-    @JsonIgnore
-    private LearningIndicationEntity learningIndicationEntity;
 
     @ApiModelProperty(
             "Value"
@@ -58,14 +51,6 @@ public class MeasureResource {
 
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
-    }
-
-    public LearningIndicationEntity getLearningIndicationEntity() {
-        return learningIndicationEntity;
-    }
-
-    public void setLearningIndicationEntity(LearningIndicationEntity learningIndicationEntity) {
-        this.learningIndicationEntity = learningIndicationEntity;
     }
 
     public Double getValue() {
