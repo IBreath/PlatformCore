@@ -2,7 +2,9 @@ package com.ibreath.model.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "User")
@@ -12,8 +14,8 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToMany(mappedBy="userEntity", cascade=CascadeType.ALL)
-    private List<MesureEntity> alcoholMesures;
+    @OneToMany(mappedBy="userEntity", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<MesureEntity> alcoholMesures = new HashSet<>();
 
     @Column(name = "firstname")
     private String firstname;
@@ -45,11 +47,11 @@ public class UserEntity {
         return this;
     }
 
-    public List<MesureEntity> getAlcoholMesures() {
+    public Set<MesureEntity> getAlcoholMesures() {
         return alcoholMesures;
     }
 
-    public UserEntity setAlcoholMesures(List<MesureEntity> alcoholMesures) {
+    public UserEntity setAlcoholMesures(Set<MesureEntity> alcoholMesures) {
         this.alcoholMesures = alcoholMesures;
         return this;
     }

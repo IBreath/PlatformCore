@@ -1,6 +1,6 @@
 package com.ibreath.api;
 
-import com.ibreath.resource.MeasureResource;
+import com.ibreath.resource.GetMeasureResource;
 import com.ibreath.resource.PostMeasureResource;
 import com.ibreath.service.MeasureService;
 import io.swagger.annotations.Api;
@@ -19,7 +19,7 @@ public class MeasureController {
 
     @ApiOperation("Get measure Data")
     @RequestMapping(value="/measure/10/{user}", method = RequestMethod.GET)
-    public List<MeasureResource> getLast10Values(@PathVariable("user") String userId) {
+    public List<GetMeasureResource> getLast10Values(@PathVariable("user") String userId) {
         return service.getLast10Values(userId);
     }
 
@@ -31,7 +31,7 @@ public class MeasureController {
                     value= "Datas",
                     required = true) @RequestBody PostMeasureResource resource
     ) {
-        return service.post(userId, resource);
+        return service.postMeasure(userId, resource);
     }
 
 

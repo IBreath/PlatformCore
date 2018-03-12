@@ -4,8 +4,9 @@ import com.ibreath.model.entity.MesureEntity;
 import com.ibreath.model.entity.UserEntity;
 import com.ibreath.model.repository.AlcoholRepository;
 import com.ibreath.model.repository.UserRepository;
-import com.ibreath.resource.MeasureResource;
+import com.ibreath.resource.GetMeasureResource;
 import com.ibreath.resource.PostMeasureResource;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +20,14 @@ public class MeasureService {
     private AlcoholRepository repository;
     private UserRepository userRepository;
 
-    public List<MeasureResource> getLast10Values(String userId) {
+    public List<GetMeasureResource> getLast10Values(String userId) {
 
         UserEntity userEntity = userRepository.findOne(Long.valueOf(userId));
         List<MesureEntity> alcoholMesures = repository.findFirst10AlcoholMesureByUserEntity(userEntity);
-        List<MeasureResource> resources = new ArrayList<>();
+        List<GetMeasureResource> resources = new ArrayList<>();
 
         alcoholMesures.forEach( e ->  {
-            MeasureResource mapper = new MeasureResource();
+            GetMeasureResource mapper = new GetMeasureResource();
             mapper.setId(e.getId());
             mapper.setDateTime(e.getDateTime());
             mapper.setUserEntity(e.getUserEntity());
@@ -37,15 +38,19 @@ public class MeasureService {
        return resources;
     }
 
-    public PostMeasureResource post(String userId, PostMeasureResource resource) {
+    public PostMeasureResource postMeasure(String userId, PostMeasureResource resource) {
         UserEntity userEntity = userRepository.findOne(Long.valueOf(userId));
-       // LearningIndicationEntity learningIndicationEntity = learningIndicationRepository.findOne(resource.getLearningIndication());
 
         MesureEntity mesure = new MesureEntity();
         mesure.setUserEntity(userEntity);
-      //  mesure.setLearningIndicationEntity(learningIndicationEntity);
         mesure.setDateTime(LocalDateTime.now());
         mesure.setValue(resource.getValue());
+
+        if (resource.getValue() <= 0.5) {
+            mesure.setDecreaseTime(0.0);
+        } else {
+            mesure.setDecreaseTime((resource.getValue()-0.5)/userEntity.getDecreaseRate());
+        }
 
         repository.save(mesure);
 

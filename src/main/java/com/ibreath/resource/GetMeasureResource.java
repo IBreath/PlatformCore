@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @ApiModel(description = "Measure Controller")
 @JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE)
-public class MeasureResource {
+public class GetMeasureResource {
 
     @ApiModelProperty(
             "Id description"
