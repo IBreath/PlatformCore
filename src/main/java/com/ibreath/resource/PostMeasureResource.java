@@ -10,24 +10,10 @@ import io.swagger.annotations.ApiModelProperty;
 public class PostMeasureResource {
 
     @ApiModelProperty(
-            "Id description"
-    )
-    @JsonProperty
-    private long learningIndication;
-
-    @ApiModelProperty(
             "Value"
     )
     @JsonProperty
     private Double value;
-
-    public long getLearningIndication() {
-        return learningIndication;
-    }
-
-    public void setLearningIndication(long learningIndication) {
-        this.learningIndication = learningIndication;
-    }
 
     public Double getValue() {
         return value;

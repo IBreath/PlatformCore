@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AlcoholRepository extends CrudRepository<MesureEntity, Long>{
+public interface MesureRepository extends CrudRepository<MesureEntity, Long> {
     List<MesureEntity> findFirst10AlcoholMesureByUserEntity(@Param("userEntity") UserEntity userEntity);
 }

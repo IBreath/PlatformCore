@@ -1,15 +1,16 @@
 package com.ibreath.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Mesure")
-public class MesureEntity {
+@Table(name = "c_Mesure")
+public class MesureEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id", nullable=false)
@@ -24,11 +25,11 @@ public class MesureEntity {
     @Column(name = "dateTime")
     private LocalDateTime dateTime;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public MesureEntity setId(long id) {
+    public MesureEntity setId(Long id) {
         this.id = id;
         return this;
     }

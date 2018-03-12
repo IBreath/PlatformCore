@@ -1,21 +1,21 @@
 package com.ibreath.model.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "User")
-public class UserEntity {
+@Table(name = "c_User")
+public class UserEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @OneToMany(mappedBy="userEntity", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<MesureEntity> alcoholMesures = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userEntity",targetEntity = MesureEntity.class)
+    private Set<MesureEntity> mesures = new HashSet<>();
 
     @Column(name = "firstname")
     private String firstname;
@@ -38,21 +38,25 @@ public class UserEntity {
     @Column(name = "decreaseRate")
     private Double decreaseRate;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public UserEntity setId(long id) {
+    public UserEntity setId(Long id) {
         this.id = id;
         return this;
     }
 
     public Set<MesureEntity> getAlcoholMesures() {
-        return alcoholMesures;
+        return mesures;
     }
 
-    public UserEntity setAlcoholMesures(Set<MesureEntity> alcoholMesures) {
-        this.alcoholMesures = alcoholMesures;
+    public Set<MesureEntity> getMesures() {
+        return mesures;
+    }
+
+    public UserEntity setMesures(Set<MesureEntity> mesures) {
+        this.mesures = mesures;
         return this;
     }
 

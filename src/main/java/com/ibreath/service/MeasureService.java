@@ -2,28 +2,28 @@ package com.ibreath.service;
 
 import com.ibreath.model.entity.MesureEntity;
 import com.ibreath.model.entity.UserEntity;
-import com.ibreath.model.repository.AlcoholRepository;
+import com.ibreath.model.repository.MesureRepository;
 import com.ibreath.model.repository.UserRepository;
 import com.ibreath.resource.GetMeasureResource;
 import com.ibreath.resource.PostMeasureResource;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class MeasureService {
 
-    private AlcoholRepository repository;
+    private MesureRepository mesureRepository;
     private UserRepository userRepository;
 
     public List<GetMeasureResource> getLast10Values(String userId) {
 
         UserEntity userEntity = userRepository.findOne(Long.valueOf(userId));
-        List<MesureEntity> alcoholMesures = repository.findFirst10AlcoholMesureByUserEntity(userEntity);
+        Set<MesureEntity> alcoholMesures = userEntity.getAlcoholMesures();
         List<GetMeasureResource> resources = new ArrayList<>();
 
         alcoholMesures.forEach( e ->  {
@@ -52,14 +52,14 @@ public class MeasureService {
             mesure.setDecreaseTime((resource.getValue()-0.5)/userEntity.getDecreaseRate());
         }
 
-        repository.save(mesure);
+        mesureRepository.save(mesure);
 
         return resource;
     }
 
     @Autowired
-    public void setRepository(AlcoholRepository repository) {
-        this.repository = repository;
+    public void setRepository(MesureRepository mesureRepository) {
+        this.mesureRepository = mesureRepository;
     }
 
     @Autowired
