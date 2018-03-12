@@ -1,7 +1,6 @@
 package com.ibreath.controller;
 
 import com.ibreath.resource.dto.MeasureDto;
-import com.ibreath.resource.dto.PostMeasureResource;
 import com.ibreath.service.MeasureService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,11 +24,11 @@ public class MeasureController {
 
     @ApiOperation("Post measure data")
     @RequestMapping(value="/measure/{user}", method = RequestMethod.POST)
-    public PostMeasureResource post(
+    public MeasureDto post(
             @PathVariable("user") String userId,
             @ApiParam(
                     value= "Datas",
-                    required = true) @RequestBody PostMeasureResource resource
+                    required = true) @RequestBody MeasureDto resource
     ) {
         return service.postMeasure(userId, resource);
     }

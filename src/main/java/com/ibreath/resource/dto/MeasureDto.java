@@ -2,6 +2,7 @@ package com.ibreath.resource.dto;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ibreath.resource.model.entity.UserEntity;
 import io.swagger.annotations.ApiModel;
@@ -11,46 +12,30 @@ import java.time.LocalDateTime;
 
 @ApiModel(description = "Measure Controller")
 @JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MeasureDto {
 
-    @ApiModelProperty(
-            "Id description"
-    )
+    @ApiModelProperty("Id description")
     @JsonProperty
-    private long id;
+    private Long id;
 
-    @ApiModelProperty(
-            "User Entity"
-    )
-    @JsonIgnore
-    private UserEntity userEntity;
-
-    @ApiModelProperty(
-            "Value"
-    )
+    @ApiModelProperty("Value")
     @JsonProperty
     private Double value;
 
-    @ApiModelProperty(
-            "DateTime"
-    )
+    @ApiModelProperty("DateTime")
     @JsonProperty
     private LocalDateTime dateTime;
 
-    public long getId() {
+    @ApiModelProperty("Decrease Time")
+    private String decreaseTime;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
     }
 
     public Double getValue() {
@@ -67,5 +52,13 @@ public class MeasureDto {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String getDecreaseTime() {
+        return decreaseTime;
+    }
+
+    public void setDecreaseTime(String decreaseTime) {
+        this.decreaseTime = decreaseTime;
     }
 }

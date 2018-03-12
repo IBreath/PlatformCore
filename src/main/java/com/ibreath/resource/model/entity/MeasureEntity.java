@@ -20,7 +20,7 @@ public class MeasureEntity implements Serializable {
     private Double value;
 
     @Column(name = "decreaseTime")
-    private Double decreaseTime;
+    private String decreaseTime;
 
     @Column(name = "dateTime")
     private LocalDateTime dateTime;
@@ -52,13 +52,12 @@ public class MeasureEntity implements Serializable {
         return this;
     }
 
-    public Double getDecreaseTime() {
+    public String getDecreaseTime() {
         return decreaseTime;
     }
 
-    public MeasureEntity setDecreaseTime(Double decreaseTime) {
+    public void setDecreaseTime(String decreaseTime) {
         this.decreaseTime = decreaseTime;
-        return this;
     }
 
     public LocalDateTime getDateTime() {
