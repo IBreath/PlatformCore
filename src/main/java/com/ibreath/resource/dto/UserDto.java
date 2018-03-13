@@ -60,7 +60,6 @@ public class UserDto {
 
     @ApiModelProperty("Decrease Rate")
     @JsonProperty
-    @NotNull
     private Double decreaseRate;
 
     @NotNull

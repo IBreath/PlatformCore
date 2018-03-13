@@ -43,6 +43,7 @@ public class UserService {
 
         UserEntity entity = userMapper.mapDtoToEntity(dto);
         repository.save(entity);
+        dto.setDecreaseRate(entity.getDecreaseRate());
         return dto;
     }
 
