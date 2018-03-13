@@ -1,12 +1,12 @@
-package com.ibreath.model.entity;
+package com.ibreath.resource.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "c_Mesure")
-public class MesureEntity implements Serializable {
+@Table(name = "c_Measure")
+public class MeasureEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +29,7 @@ public class MesureEntity implements Serializable {
         return id;
     }
 
-    public MesureEntity setId(Long id) {
+    public MeasureEntity setId(Long id) {
         this.id = id;
         return this;
     }
@@ -38,7 +38,7 @@ public class MesureEntity implements Serializable {
         return userEntity;
     }
 
-    public MesureEntity setUserEntity(UserEntity userEntity) {
+    public MeasureEntity setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
         return this;
     }
@@ -47,7 +47,7 @@ public class MesureEntity implements Serializable {
         return value;
     }
 
-    public MesureEntity setValue(Double value) {
+    public MeasureEntity setValue(Double value) {
         this.value = value;
         return this;
     }
@@ -56,7 +56,7 @@ public class MesureEntity implements Serializable {
         return decreaseTime;
     }
 
-    public MesureEntity setDecreaseTime(Double decreaseTime) {
+    public MeasureEntity setDecreaseTime(Double decreaseTime) {
         this.decreaseTime = decreaseTime;
         return this;
     }
@@ -65,7 +65,7 @@ public class MesureEntity implements Serializable {
         return dateTime;
     }
 
-    public MesureEntity setDateTime(LocalDateTime dateTime) {
+    public MeasureEntity setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
         return this;
     }
