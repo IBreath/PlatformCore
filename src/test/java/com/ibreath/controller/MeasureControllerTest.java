@@ -26,7 +26,7 @@
 //
 //    /*@Test
 //    public void getTest() throws Exception {
-//        this.mockMvc.perform(get("/api/measure"))
+//        this.mockMvc.perform(get("/controller/measure"))
 //                .andExpect(status().isOk());
 //    }*/
 //
