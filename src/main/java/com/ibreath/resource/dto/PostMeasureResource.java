@@ -1,4 +1,4 @@
-package com.ibreath.resource;
+package com.ibreath.resource.dto;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;

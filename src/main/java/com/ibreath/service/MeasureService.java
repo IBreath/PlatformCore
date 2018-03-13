@@ -1,33 +1,32 @@
 package com.ibreath.service;
 
-import com.ibreath.model.entity.MesureEntity;
-import com.ibreath.model.entity.UserEntity;
-import com.ibreath.model.repository.MesureRepository;
-import com.ibreath.model.repository.UserRepository;
-import com.ibreath.resource.GetMeasureResource;
-import com.ibreath.resource.PostMeasureResource;
+import com.ibreath.resource.dto.MeasureDto;
+import com.ibreath.resource.dto.PostMeasureResource;
+import com.ibreath.resource.model.entity.MeasureEntity;
+import com.ibreath.resource.model.entity.UserEntity;
+import com.ibreath.resource.model.repository.MeasureRepository;
+import com.ibreath.resource.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class MeasureService {
 
-    private MesureRepository mesureRepository;
+    private MeasureRepository measureRepository;
     private UserRepository userRepository;
 
-    public List<GetMeasureResource> getLast10Values(String userId) {
+    public List<MeasureDto> getLast10Values(String userId) {
 
         UserEntity userEntity = userRepository.findOne(Long.valueOf(userId));
-        Set<MesureEntity> alcoholMesures = userEntity.getAlcoholMesures();
-        List<GetMeasureResource> resources = new ArrayList<>();
+        List<MeasureEntity> measures = userEntity.getMeasures();
+        List<MeasureDto> resources = new ArrayList<>();
 
-        alcoholMesures.forEach( e ->  {
-            GetMeasureResource mapper = new GetMeasureResource();
+        measures.forEach( e ->  {
+            MeasureDto mapper = new MeasureDto();
             mapper.setId(e.getId());
             mapper.setDateTime(e.getDateTime());
             mapper.setUserEntity(e.getUserEntity());
@@ -39,27 +38,35 @@ public class MeasureService {
     }
 
     public PostMeasureResource postMeasure(String userId, PostMeasureResource resource) {
+        // verifier user NPE
         UserEntity userEntity = userRepository.findOne(Long.valueOf(userId));
 
-        MesureEntity mesure = new MesureEntity();
-        mesure.setUserEntity(userEntity);
-        mesure.setDateTime(LocalDateTime.now());
-        mesure.setValue(resource.getValue());
+
+        MeasureEntity measure = new MeasureEntity();
+        measure.setUserEntity(userEntity);
+        measure.setDateTime(LocalDateTime.now());
+        measure.setValue(resource.getValue());
 
         if (resource.getValue() <= 0.5) {
-            mesure.setDecreaseTime(0.0);
+            // tu peux conduire
+            if (resource.getValue() > 0) {
+                //update taux
+                measure.setDecreaseTime(0.0);
+            }
+            // retourner truc sinon NPE
         } else {
-            mesure.setDecreaseTime((resource.getValue()-0.5)/userEntity.getDecreaseRate());
+            measure.setDecreaseTime((resource.getValue()-0.5)/userEntity.getDecreaseRate());
+            // update taux
         }
 
-        mesureRepository.save(mesure);
+        measureRepository.save(measure);
 
         return resource;
     }
 
     @Autowired
-    public void setRepository(MesureRepository mesureRepository) {
-        this.mesureRepository = mesureRepository;
+    public void setRepository(MeasureRepository measureRepository) {
+        this.measureRepository = measureRepository;
     }
 
     @Autowired

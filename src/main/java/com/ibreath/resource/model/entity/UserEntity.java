@@ -1,10 +1,9 @@
-package com.ibreath.model.entity;
+package com.ibreath.resource.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "c_User")
@@ -14,8 +13,8 @@ public class UserEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userEntity",targetEntity = MesureEntity.class)
-    private Set<MesureEntity> mesures = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userEntity",targetEntity = MeasureEntity.class)
+    private List<MeasureEntity> measures;
 
     @Column(name = "firstname")
     private String firstname;
@@ -47,16 +46,12 @@ public class UserEntity implements Serializable {
         return this;
     }
 
-    public Set<MesureEntity> getAlcoholMesures() {
-        return mesures;
+    public List<MeasureEntity> getMeasures() {
+        return measures;
     }
 
-    public Set<MesureEntity> getMesures() {
-        return mesures;
-    }
-
-    public UserEntity setMesures(Set<MesureEntity> mesures) {
-        this.mesures = mesures;
+    public UserEntity setMeasures(List<MeasureEntity> measures) {
+        this.measures = measures;
         return this;
     }
 

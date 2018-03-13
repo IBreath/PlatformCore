@@ -1,9 +1,9 @@
-package com.ibreath.resource;
+package com.ibreath.resource.dto;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ibreath.model.entity.UserEntity;
+import com.ibreath.resource.model.entity.UserEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @ApiModel(description = "Measure Controller")
 @JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE)
-public class GetMeasureResource {
+public class MeasureDto {
 
     @ApiModelProperty(
             "Id description"
