@@ -1,5 +1,7 @@
 package com.ibreath.resource.model.entity;
 
+import com.ibreath.enumeration.GenderEnum;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -34,8 +36,14 @@ public class UserEntity implements Serializable {
     @Column(name = "weight")
     private Double weight;
 
+    @Column(name = "gender")
+    private GenderEnum gender;
+
     @Column(name = "decreaseRate")
     private Double decreaseRate;
+
+    @Column(name = "password")
+    private String password;
 
     public Long getId() {
         return id;
@@ -115,6 +123,24 @@ public class UserEntity implements Serializable {
 
     public UserEntity setDecreaseRate(Double decreaseRate) {
         this.decreaseRate = decreaseRate;
+        return this;
+    }
+
+    public GenderEnum getGender() {
+        return gender;
+    }
+
+    public UserEntity setGender(GenderEnum gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public UserEntity setPassword(String password) {
+        this.password = password;
         return this;
     }
 }

@@ -17,13 +17,13 @@ public class MeasureController {
     private MeasureService service;
 
     @ApiOperation("Get measure Data")
-    @RequestMapping(value="/measure/10/{user}", method = RequestMethod.GET)
+    @RequestMapping(value="/measures/10/{user}", method = RequestMethod.GET)
     public List<MeasureDto> getLast10Values(@PathVariable("user") String userId) {
         return service.getLast10Values(userId);
     }
 
     @ApiOperation("Post measure data")
-    @RequestMapping(value="/measure/{user}", method = RequestMethod.POST)
+    @RequestMapping(value="/measures/{user}", method = RequestMethod.POST)
     public MeasureDto post(
             @PathVariable("user") String userId,
             @ApiParam(
