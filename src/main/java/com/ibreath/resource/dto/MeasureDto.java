@@ -28,6 +28,7 @@ public class MeasureDto {
     private LocalDateTime dateTime;
 
     @ApiModelProperty("Decrease Time")
+    @JsonProperty
     private String decreaseTime;
 
     public Long getId() {
