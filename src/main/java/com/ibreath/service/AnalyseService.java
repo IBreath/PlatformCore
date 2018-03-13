@@ -20,10 +20,12 @@ public class AnalyseService {
         MeasureEntity lastMeasure = measureRepository.findTopByUserEntityOrderByDateTime(userEntity);
         if (lastMeasure != null) {
             if (lastMeasure.getDateTime().isAfter(measureTime.minusHours(8))) {
-                Double actualDecreaseRate = (lastMeasure.getValue() - rate) / ChronoUnit.MINUTES.between(lastMeasure.getDateTime(), measureTime);
-                Double updatedDecreaseRate = (userEntity.getDecreaseRate() + actualDecreaseRate)/2;
-                userEntity.setDecreaseRate(updatedDecreaseRate);
-                userRepository.save(userEntity);
+                if (lastMeasure.getValue()>= rate) {
+                    Double actualDecreaseRate = (lastMeasure.getValue() - rate) / ChronoUnit.MINUTES.between(lastMeasure.getDateTime(), measureTime);
+                    Double updatedDecreaseRate = (userEntity.getDecreaseRate() + actualDecreaseRate)/2;
+                    userEntity.setDecreaseRate(updatedDecreaseRate);
+                    userRepository.save(userEntity);
+                }
             }
         }
     }
