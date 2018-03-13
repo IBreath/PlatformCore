@@ -30,7 +30,7 @@ public class AnalyseService {
 
     String getDecreaseTime(Double rate, LocalDateTime measureTime, UserEntity userEntity) {
         Double decreaseTime;
-        if (rate <= 0.5) {
+        if (rate <= 0.25) {
             decreaseTime = 0.0;
             if (rate > 0) {
                 updateDecreaseRate(userEntity, rate, measureTime);
