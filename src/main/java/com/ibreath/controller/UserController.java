@@ -18,7 +18,7 @@ public class UserController {
     private UserService service;
 
     @ApiOperation("Get an user information")
-    @RequestMapping(value="/{userId}", method = RequestMethod.GET)
+    @GetMapping("/{userId}")
     public UserDto getUser(@PathVariable("userId") String userId) throws Exception {
         return service.getUser(userId);
     }

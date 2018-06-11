@@ -18,13 +18,13 @@ public class MeasureController {
     private MeasureService service;
 
     @ApiOperation("Get measure Data")
-    @RequestMapping(value="/10/{user}", method = RequestMethod.GET)
+    @GetMapping("/10/{user}")
     public List<MeasureDto> getLast10Values(@PathVariable("user") String userId) {
         return service.getLast10Values(userId);
     }
 
     @ApiOperation("Post measure data")
-    @RequestMapping(value="/{user}", method = RequestMethod.POST)
+    @PostMapping("/{user}")
     public MeasureDto post(
             @PathVariable("user") String userId,
             @ApiParam(
