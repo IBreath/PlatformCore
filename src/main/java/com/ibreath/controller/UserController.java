@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/users")
 @Api("User Controller")
 public class UserController {
 
     private UserService service;
 
     @ApiOperation("Get an user information")
-    @RequestMapping(value="/users/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value="/{userId}", method = RequestMethod.GET)
     public UserDto getUser(@PathVariable("userId") String userId) throws Exception {
         return service.getUser(userId);
     }
 
     @ApiOperation("Create an user")
-    @RequestMapping(value="/users", method = RequestMethod.POST)
+    @PostMapping
     public UserDto post(
             @ApiParam(value= "Data", required = true)
             @Valid @RequestBody UserDto resource

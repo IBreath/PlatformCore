@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/measures")
 @Api("Measure")
 public class MeasureController {
 
     private MeasureService service;
 
     @ApiOperation("Get measure Data")
-    @RequestMapping(value="/measures/10/{user}", method = RequestMethod.GET)
+    @RequestMapping(value="/10/{user}", method = RequestMethod.GET)
     public List<MeasureDto> getLast10Values(@PathVariable("user") String userId) {
         return service.getLast10Values(userId);
     }
 
     @ApiOperation("Post measure data")
-    @RequestMapping(value="/measures/{user}", method = RequestMethod.POST)
+    @RequestMapping(value="/{user}", method = RequestMethod.POST)
     public MeasureDto post(
             @PathVariable("user") String userId,
             @ApiParam(
