@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/measures")
+@RequestMapping(value = "/measures")
 @Api("Measure")
 public class MeasureController {
 
