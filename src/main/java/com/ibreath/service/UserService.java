@@ -1,18 +1,17 @@
 package com.ibreath.service;
 
-import com.ibreath.enumeration.GenderEnum;
 import com.ibreath.resource.dto.UserDto;
 import com.ibreath.resource.mapper.UserMapper;
 import com.ibreath.resource.model.entity.UserEntity;
 import com.ibreath.resource.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.apache.log4j.Logger;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -22,6 +21,18 @@ public class UserService {
     private UserMapper userMapper;
 
     private static Logger logger = Logger.getLogger(UserService.class);
+
+    public List<UserDto> getAllUsers() throws Exception {
+
+        List<UserDto> userDtos = new ArrayList<>();
+        List<UserEntity> userEntities = (List<UserEntity>) repository.findAll();
+        userEntities.forEach(userEntity -> {
+            UserDto dto = userMapper.mapEntityToDto(userEntity);
+            userDtos.add(dto);
+        });
+
+        return userDtos;
+    }
 
     public UserDto getUser(String userId) throws Exception {
 
