@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -16,6 +17,12 @@ import javax.validation.Valid;
 public class UserController {
 
     private UserService service;
+
+    @ApiOperation("Get an user information")
+    @GetMapping
+    public List<UserDto> getAllUsers() throws Exception {
+        return service.getAllUsers();
+    }
 
     @ApiOperation("Get an user information")
     @GetMapping("/{userId}")
