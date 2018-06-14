@@ -1,5 +1,6 @@
 package com.ibreath.service;
 
+import com.ibreath.resource.dto.LoginDto;
 import com.ibreath.resource.dto.UserDto;
 import com.ibreath.resource.mapper.UserMapper;
 import com.ibreath.resource.model.entity.UserEntity;
@@ -56,6 +57,15 @@ public class UserService {
         repository.save(entity);
         dto.setDecreaseRate(entity.getDecreaseRate());
         return dto;
+    }
+
+    public UserDto postLogin(LoginDto dto) throws Exception {
+
+        UserEntity entity = repository.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
+        if (entity == null) {
+            throw new Exception("Bad password or login, please retry");
+        }
+        return userMapper.mapEntityToDto(entity);
     }
 
     private boolean emailExist(String email) {

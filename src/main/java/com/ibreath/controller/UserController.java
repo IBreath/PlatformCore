@@ -1,5 +1,6 @@
 package com.ibreath.controller;
 
+import com.ibreath.resource.dto.LoginDto;
 import com.ibreath.resource.dto.UserDto;
 import com.ibreath.service.UserService;
 import io.swagger.annotations.Api;
@@ -37,6 +38,15 @@ public class UserController {
             @Valid @RequestBody UserDto resource
     ) throws Exception {
         return service.createUser(resource);
+    }
+
+    @ApiOperation("Login an user")
+    @PostMapping("/login")
+    public UserDto postLogin(
+            @ApiParam(value= "Data", required = true)
+            @Valid @RequestBody LoginDto resource
+    ) throws Exception {
+        return service.postLogin(resource);
     }
 
     @Autowired
