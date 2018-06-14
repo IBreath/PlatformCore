@@ -1,7 +1,6 @@
 package com.ibreath.resource.dto;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ibreath.annotation.PasswordMatches;
 import com.ibreath.annotation.ValidEmail;
@@ -19,7 +18,6 @@ import java.time.LocalDateTime;
 public class UserDto {
 
     @ApiModelProperty("Id of an user")
-    @JsonIgnore
     private Long id;
 
     @ApiModelProperty("Firstname")
