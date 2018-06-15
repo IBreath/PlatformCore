@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 public class UserDto {
 
     @ApiModelProperty("Id of an user")
+    @JsonProperty
     private Long id;
 
     @ApiModelProperty("Firstname")
